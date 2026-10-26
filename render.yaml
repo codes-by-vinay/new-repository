@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: fictionflix
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    disk:
+      name: fictionflix-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /var/data/fictionflix.sqlite3
+      - key: UPLOAD_FOLDER
+        value: /var/data/uploads
+      - key: OWNER_EMAIL
+        sync: false
+      - key: OWNER_SETUP_TOKEN
+        sync: false
